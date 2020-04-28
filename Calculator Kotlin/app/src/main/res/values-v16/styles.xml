@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SideButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+        <item name="android:background">@color/sidebar</item>
+        <item name="android:textColor">@color/number</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/oxygen_bold</item>
+    </style>
+</resources>

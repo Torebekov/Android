@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="ButtonBack">#202125</color>
+    <color name="number">#e9eaee</color>
+    <color name="action">#89b4f6</color>
+    <color name="sidebar">#174fa6</color>
+    <color name="borderline">#303133</color>
+</resources>
