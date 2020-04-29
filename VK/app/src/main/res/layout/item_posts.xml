@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15sp"
+            android:src="@mipmap/ic_launcher_round"></de.hdodenhof.circleimageview.CircleImageView>
+
+        <TableLayout android:layout_width="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="211dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginTop="10sp"
+                    android:text="Settitle"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tvPostTime"
+                    android:layout_width="211dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginTop="0sp"
+                    android:text="час назад"
+                    android:textColor="#000"
+                    android:textSize="11sp" />
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="Roboto"
+        android:lineSpacingExtra="2dp"
+        android:maxLength="250"
+        android:text="Description"
+        android:textColor="#000"
+        android:textSize="14sp"
+        tools:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:visibility="visible" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btnLike"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_favorite_border_black_24dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="855"
+            android:textColor="#76787A" />
+
+        <Button
+            android:id="@+id/btnComment"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_comment_outline_24"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="855"
+            android:textColor="#76787A" />
+
+        <Button
+            android:id="@+id/btnRepost"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_share_outline_24"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="855"
+            android:textColor="#76787A" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/ic_remove_red_eye_black_24dp" />
+
+        <TextView
+            android:id="@+id/views"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical"
+            android:text="145"
+            android:textColor="#888"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#fff"
+        android:scaleType="fitXY"></ImageView>
+</LinearLayout>
+
+
+
+
+
+
