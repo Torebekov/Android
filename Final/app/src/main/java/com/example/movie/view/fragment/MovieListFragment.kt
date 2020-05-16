@@ -23,6 +23,9 @@ import com.example.movie.view.activity.MainActivity
 import com.example.movie.view.adapter.MovieListAdapter
 import com.example.movie.view_model.MoviesListViewModel
 import com.example.movie.view_model.ViewModelProviderFactory
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -39,9 +42,8 @@ class MovieListFragment : BaseFragment() {
     private var bigTitle: TextView? = null
     private var bigDate: TextView? = null
     private lateinit var movie: Movie
-
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var movieListViewModel: MoviesListViewModel
-
     private var currentPage = NestedScroll.PAGE_START
     private var isLastPage = false
     private var isLoading = false
@@ -50,6 +52,13 @@ class MovieListFragment : BaseFragment() {
         MovieListAdapter()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+        var bundle = Bundle()
+        bundle.putString("page","page_main")
+        firebaseAnalytics.logEvent("clicked",bundle)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

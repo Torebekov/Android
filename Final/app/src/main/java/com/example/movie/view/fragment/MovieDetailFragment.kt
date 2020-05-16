@@ -20,12 +20,16 @@ import com.example.movie.model.favourite.FavMovieInfo
 import com.example.movie.model.movie.Movie
 import com.example.movie.view_model.MoviesListViewModel
 import com.example.movie.view_model.ViewModelProviderFactory
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MovieDetailFragment : Fragment() {
 
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private var movieTitle: TextView? = null
     private var movieJanre: TextView? = null
     private var movieDate: TextView? = null
@@ -38,24 +42,19 @@ class MovieDetailFragment : Fragment() {
     private var backBtn: ImageButton? = null
     var sessionId: String? = null
     private var movie: Movie? = null
-
     private var scrollView: DetailScrollView? = null
-
     private lateinit var movieListViewModel: MoviesListViewModel
 
-
-    companion object {
-        fun newInstance(movie: Movie?): MovieDetailFragment? {
-            val fragment = MovieDetailFragment()
-            fragment.movie = movie
-            return fragment
-        }
-    }
 
     private val dateFormat = SimpleDateFormat("MMMM d, YYYY H:m", Locale.ENGLISH)
     private val dateYearFormat = SimpleDateFormat("YYYY", Locale.ENGLISH)
     private val initialFormat = SimpleDateFormat("YY-MM-DD", Locale.ENGLISH)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -127,8 +126,10 @@ class MovieDetailFragment : Fragment() {
                         if (isLiked == true) {
                             likeBtn?.setImageResource(R.drawable.ic_favorite_black_24dp)
 
-                        } else
+                        } else{
                             likeBtn?.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+
+                        }
                     }
                     is MoviesListViewModel.State.MovieDetails -> {
 
@@ -140,6 +141,9 @@ class MovieDetailFragment : Fragment() {
                             movieDate?.text = dateFormat.format(Date())
                             movieYear?.text = dateYearFormat.format(Date())
                         }
+                        var bundle = Bundle()
+                        bundle.putString("movie_detail", result.movie?.originalTitle)
+                        firebaseAnalytics.logEvent("clicked",bundle)
                         movieTitle?.text = result.movie?.originalTitle
                         movieDescription?.text = result.movie?.overview
                         movieJanre?.text = result.movie?.genres?.first()?.name
@@ -150,6 +154,9 @@ class MovieDetailFragment : Fragment() {
                         likeBtn?.setOnClickListener(View.OnClickListener {
                             if (isLiked == false) {
                                 isLiked = true
+                                var bundle = Bundle()
+                                bundle.putString("like", result.movie?.originalTitle)
+                                firebaseAnalytics.logEvent("clicked",bundle)
                                 likeBtn?.setImageResource(R.drawable.ic_favorite_black_24dp)
                                 Toast.makeText(
                                     activity,
@@ -196,6 +203,12 @@ class MovieDetailFragment : Fragment() {
 //        backBtn = v.findViewById(R.id.back_btn)
 
     }
-
+    companion object {
+        fun newInstance(movie: Movie?): MovieDetailFragment? {
+            val fragment = MovieDetailFragment()
+            fragment.movie = movie
+            return fragment
+        }
+    }
 
 }

@@ -16,6 +16,9 @@ import com.example.movie.view.adapter.FavListAdapter
 import com.example.movie.model.favourite.FavMovies
 import com.example.movie.view_model.MoviesListViewModel
 import com.example.movie.view_model.ViewModelProviderFactory
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -27,8 +30,15 @@ class FavouritesFragment : Fragment() {
     private var movies: ArrayList<FavMovies>? = null
     var sessionId: String? = null
     private lateinit var movieListViewModel: MoviesListViewModel
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+        var bundle = Bundle()
+        bundle.putString("page","page_favourite")
+        firebaseAnalytics.logEvent("clicked",bundle)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

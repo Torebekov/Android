@@ -12,14 +12,22 @@ import com.example.movie.R
 import com.example.movie.model.authorization.LoginActivity
 import com.example.movie.model.authorization.LoginSharedPref
 import com.crashlytics.android.Crashlytics
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 
 class UserFragment : Fragment() {
     private lateinit var logOut: Button
     private lateinit var crash: Button
     private lateinit var userName: TextView
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+        var bundle = Bundle()
+        bundle.putString("page","page_profile")
+        firebaseAnalytics.logEvent("clicked",bundle)
     }
 
     override fun onCreateView(

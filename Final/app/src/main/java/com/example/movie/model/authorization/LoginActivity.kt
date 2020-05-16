@@ -14,6 +14,11 @@ import com.example.movie.view.activity.MainActivity
 import com.example.movie.R
 import com.example.movie.view_model.LoginViewModel
 import com.example.movie.view_model.ViewModelProviderFactory
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
+
 
 
 class LoginActivity : AppCompatActivity() {
@@ -23,10 +28,12 @@ class LoginActivity : AppCompatActivity() {
     lateinit var preferences: SharedPreferences
     private lateinit var progressBar: ProgressBar
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
+        firebaseAnalytics = Firebase.analytics
         val viewModelProviderFactory = ViewModelProviderFactory(this)
         loginViewModel =
             ViewModelProvider(this, viewModelProviderFactory).get(LoginViewModel::class.java)
@@ -62,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
                                 password = password.text.toString(),
                                 requestedToken = result.token
                             )
+
                         }
                         is LoginViewModel.State.ShowActivity -> {
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -80,7 +88,11 @@ class LoginActivity : AppCompatActivity() {
                             edt.apply()
                         }
                     }
+
                 })
+            var bundle:Bundle = Bundle()
+            bundle.putString(FirebaseAnalytics.Param.METHOD, email.text.toString())
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle)
         }
     }
 }

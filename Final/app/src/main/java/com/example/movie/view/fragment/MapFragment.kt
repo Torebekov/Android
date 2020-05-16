@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.movie.R
 import com.example.movie.model.cinema.Cinema
-import com.example.movie.model.cinema.CinemaDatabase
+import com.example.movie.view_model.CinemaListViewModel
+import com.example.movie.view_model.CinemaProviderFactory
+import com.example.movie.view_model.ViewModelProviderFactory
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,14 +22,17 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var cinemaList: List<Cinema>
-    private val cinemaDatabase = CinemaDatabase()
+    private lateinit var cinemaListViewModel: CinemaListViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         map_view.onCreate(savedInstanceState)
         map_view.onResume()
         map_view.getMapAsync(this)
-        cinemaList = cinemaDatabase.getCinemaList()
+        val viewModelProviderFactory = ViewModelProviderFactory(requireContext())
+        cinemaListViewModel = ViewModelProvider(this, viewModelProviderFactory)
+            .get(CinemaListViewModel::class.java)
+        cinemaList = cinemaListViewModel.getCinemaList()
     }
 
     override fun onCreateView(
