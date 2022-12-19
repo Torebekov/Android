@@ -1,36 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".view.activity.MainActivity">
-<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--        android:id="@+id/main_content"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--        <include layout="@layout/content_main" />-->
-<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    tools:context=".presentation.view.MainActivity"
+    android:background="#151c25"
+    android:id="@+id/main_fragment_layout">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:id="@+id/swipe_main">
 
-        android:layout_above="@id/bot"/>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/nestedScroll_main">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#FFF"
+            <RelativeLayout
+                android:id="@+id/big_card_lay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        app:itemTextColor="@color/bnv_tab_item_foreground"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation" />
+                <RelativeLayout
+                    android:id="@+id/main_layout_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/slide_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="275dp" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:background="#151c25"
+                        app:tabGravity="center"
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/slide_page"
+                        app:tabBackground="@drawable/indicator_selector"
+                        app:tabIndicatorHeight="0dp"/>
+
+
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/title_recycleView"
+                    android:layout_below="@id/main_layout_pic"
+                    android:textColor="@color/text_light_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Best Popular Films and movies"
+                    android:textAllCaps="true"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/title_recycleView"
+                    android:id="@+id/moview_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical" />
+                <TextView
+                    android:id="@+id/program_tittle_recyclerView"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/moview_recycler_view"
+                    android:textColor="@color/text_light_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Best Popular TV Shows and programs"
+                    android:textAllCaps="true"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/program_tittle_recyclerView"
+                    android:id="@+id/tvShows_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical" />
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

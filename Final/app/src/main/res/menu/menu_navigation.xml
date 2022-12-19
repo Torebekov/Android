@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Главная"
+        android:icon="@drawable/home_24"/>
+    <item
+        android:id="@+id/catygory"
+        android:title="Категории"
+        android:icon="@drawable/ic_baseline_list_alt"/>
+    <item
+        android:id="@+id/like_posts"
+        android:title="Закладки"
+        android:icon="@drawable/video_library"/>
+
+    <item
+        android:id="@+id/about"
+        android:title="Профиль"
+        android:icon="@drawable/ic_baseline_person_outline_24"/>
+
+</menu>
